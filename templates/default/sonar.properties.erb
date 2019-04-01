@@ -27,13 +27,17 @@ sonar.jdbc.password=<%= node['sonarqube']['jdbc']['password'] %>
 # Note: it does not accept connections from remote hosts, so the
 # SonarQube server and the maven plugin must be executed on the same host.
 
+<% if node['sonarqube']['jdbc']['url'] -%>
 # Database URL
 sonar.jdbc.url=<%= node['sonarqube']['jdbc']['url'] %>
+<% end -%>
 
+<% if !node['sonarqube']['jdbc']['url'] -%>
 # directory containing H2 database files. By default it's the /data directory in the SonarQube installation.
 sonar.embeddedDatabase.dataDir=<%= node['sonarqube']['embeddedDatabase']['dataDir'] %>
 # H2 embedded database server listening port, defaults to 9092
 sonar.embeddedDatabase.port=<%= node['sonarqube']['embeddedDatabase']['port'] %>
+<% end -%>
 
 #----- Connection pool settings
 sonar.jdbc.maxActive=<%= node['sonarqube']['jdbc']['maxActive'] %>
